@@ -11,7 +11,7 @@ body {
     min-height: 100%;
   }
 
-.nav-item a {
+.nav-item span {
     color: #ffffff !important;
     margin-left: 20%;
   }
