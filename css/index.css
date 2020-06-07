@@ -1,0 +1,80 @@
+body {
+    background-color: rgba(0, 0, 0, 0);
+    padding: 5%;
+    margin: 20%;
+}
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+  }
+
+.nav-item a {
+    color: #ff0000 !important;
+    margin-left: 20%;
+  }
+.nav-item span:hover {
+    color: #ff0000 !important;
+    font-size: 170% !important;
+  } 
+
+#Name_card {
+    margin-top: 5%;
+    color: #ffffff;
+    margin-top: 6%;
+    margin-left: 10%;
+    font-size: x-large;
+    font-family: "Google Sans Display",Roboto,Arial,sans-serif; 
+}
+
+#name {
+    color: #FF0000;
+    font-size: 400%;
+}
+.conatainer {
+    margin-top: 3%;
+}
+#work{
+    margin: 13%;
+    color: #ffffff;
+    font-size: 140%;
+}
+#work .row {
+    margin-top: 15%;
+}
+
+#work h5 {
+    letter-spacing: 12%;
+    color: rgba(153, 153, 153, 0.51);
+}
+#work span {
+    color: #FF0000;
+}
+
+hr {
+    background-color: #ffffff !important;
+    width: 80%;
+}
+footer h3 {
+    margin-top: 35%;
+    color: #FF0000;
+}
+footer {
+    color: #ffffff;
+}
+
+footer ul {
+    list-style: none;
+}
+footer a {
+    text-decoration: none;
+    color: #ffffff;
+  }
+  
+  footer a:hover {
+    color: #FF0000;
+    font-size: 130%;
+  }
+  
