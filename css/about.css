@@ -4,7 +4,7 @@ body {
     margin: 20%;
   }
 
-  .nav-item a {
+  .nav-item span {
     color: #ffffff !important;
     margin-left: 20%;
   }
