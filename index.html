@@ -1,4 +1,4 @@
-<html lang="en">
+<!-- <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -144,4 +144,85 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
+</html>
+ -->
+
+
+ <!DOCTYPE html>
+<html lang="en">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <head>
+        <title>Asking out</title>
+    </head>
+    <body>
+        <div id="Header" style="text-align: center;padding:25% 0;background-color: #4bb3ce; color: #383c3f;">
+            <h1>Are you free on Friday?</h1>
+                <button type="button" id="successs1" class="btn btn-success" onclick="successs1();">YES</button> 
+                <button type="button" id="failed1" class="btn btn-danger" onclick="failed1();">NO</button>
+        </div>
+        <div id="body" style="text-align: center;padding:25% 0;background-color: #4bb3ce; color: #383c3f; display: none;">
+            <h1>Will you come to a movie with me?</h1>
+                <button type="button" id="successs2" class="btn btn-success" onclick="successs2();">YES</button> 
+                <button type="button" id="failed2" class="btn btn-danger" onclick="failed2();">NO</button>
+        </div>
+        <div id="thanks" style="text-align: center;padding:25% 0;background-color: #4bb3ce; color: #383c3f; display: none;">
+            <h1>THANK YOU!!!</h1>
+        </div>
+        <script>
+            function successs1() {
+                var myButton1 = document.getElementById("successs1");
+
+                // Add a click event listener to the button
+                myButton1.addEventListener("click", function() {
+                    // Display an alert message
+                    alert("Good choice");
+                });
+                var myDiv1 = document.getElementById("Header");
+                // Set the display property to "none"
+                myDiv1.style.display = "none";
+                var myDiv2 = document.getElementById("body");
+                // Set the display property to "none"
+                myDiv2.style.display = "block";
+            }
+
+            function failed1() {
+                var myButton2 = document.getElementById("failed1");
+
+                // Add a click event listener to the button
+                myButton2.addEventListener("click", function() {
+                    // Display an alert message
+                    alert("Wrong answer selct again");
+                });
+            }
+            function successs2() {
+                var myButton1 = document.getElementById("successs2");
+
+                // Add a click event listener to the button
+                myButton1.addEventListener("click", function() {
+                    // Display an alert message
+                    alert("Good choice");
+                });
+                var myDiv = document.getElementById("body");
+                // Set the display property to "none"
+                myDiv.style.display = "none";
+                var myDiv2 = document.getElementById("thanks");
+                // Set the display property to "none"
+                myDiv2.style.display = "block";
+            }
+
+            function failed2() {
+                var myButton2 = document.getElementById("failed2");
+
+                // Add a click event listener to the button
+                myButton2.addEventListener("click", function() {
+                    // Display an alert message
+                    alert("Wrong answer selct again");
+                });
+
+            }
+        </script>
+    </body>
 </html>
