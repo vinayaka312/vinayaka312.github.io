@@ -1,229 +1,577 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V_Bhat</title>
-    <link rel="stylesheet" href="./css/index.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vinayaka Bhat — Software Development Engineer</title>
+<meta name="description" content="Vinayaka Bhat — Software Development Engineer at Amazon. Backend systems for cross-border financial platforms: distributed, event-driven, reliable at scale." />
+<style>
+  :root{
+    --text:#eaf0fb; --muted:#9db0d0; --accent:#5b8cff; --accent2:#28d3b0;
+    --border:rgba(120,140,180,.22); --glass:rgba(18,27,48,.6); --maxw:min(1280px,92vw);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--text);line-height:1.65;background:#080c18;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+  #bgvid{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
+    filter:brightness(1.85) contrast(1.08) saturate(.7)}
+  .overlay{position:fixed;inset:0;z-index:-1;
+    background:linear-gradient(180deg,rgba(8,12,24,.4),rgba(8,12,24,.6) 60%,rgba(8,12,24,.7))}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(8,12,24,.6);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+  nav{display:flex;align-items:center;justify-content:space-between;max-width:var(--maxw);margin:0 auto;padding:14px 24px}
+  .brand{font-weight:700}.brand span{color:var(--accent2)}
+  .navlinks{display:flex;gap:20px;align-items:center}
+  .navlinks a{color:var(--muted);font-size:.93rem;font-weight:500;position:relative}
+  .navlinks a:hover,.navlinks a.active{color:var(--text);text-decoration:none}
+  .navlinks a.active::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px}
+  .btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#06122b !important;font-weight:700;padding:9px 15px;border-radius:8px}
+  .btn:hover{opacity:.92;text-decoration:none}
+  .hamburger{display:none;background:none;border:0;color:var(--text);font-size:1.6rem;cursor:pointer}
+
+  .hero{padding:96px 0 52px;min-height:76vh;display:flex;flex-direction:column;justify-content:center}
+  .eyebrow{color:var(--accent2);font-weight:600;letter-spacing:2px;text-transform:uppercase;font-size:.8rem}
+  .hero h1{font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.08;margin:12px 0 4px;text-shadow:0 2px 26px rgba(0,0,0,.65)}
+  .rotate-wrap{font-size:clamp(1.1rem,3vw,1.6rem);color:var(--muted);font-weight:500;margin-bottom:22px;min-height:1.6em}
+  #rotate{color:var(--accent);font-weight:600;border-right:2px solid var(--accent);padding-right:3px}
+  .hero p.lead{font-size:1.08rem;max-width:660px;margin-bottom:28px;color:#e6eefc;text-shadow:0 1px 16px rgba(0,0,0,.6)}
+  .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .cta a{padding:11px 18px;border-radius:9px;border:1px solid var(--border);color:var(--text);font-weight:600;font-size:.95rem;background:var(--glass);backdrop-filter:blur(6px);transition:transform .15s,border-color .15s}
+  .cta a.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#06122b;border:0}
+  .cta a:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-2px)}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:38px}
+  .stat{background:var(--glass);backdrop-filter:blur(6px);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+  .stat .num{font-size:clamp(1.5rem,4vw,2.1rem);font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat label{display:block;color:var(--muted);font-size:.82rem;margin-top:4px}
+
+  section{padding:56px 0;border-top:1px solid var(--border)}
+  h3.section-title{font-size:1.55rem;margin-bottom:8px}
+  h3.section-title::before{content:"▹ ";color:var(--accent2)}
+  .sub{color:var(--muted);margin-bottom:26px;max-width:700px}
+  .reveal{opacity:0;transition:opacity .6s ease}
+  .reveal.visible{opacity:1}
+  .reveal .wv{opacity:0}
+  .reveal.visible .wv{animation:waveIn 1s cubic-bezier(.22,.61,.36,1) both}
+  .reveal.zz-right.visible .wv{animation-name:waveInR}
+  @keyframes waveIn{from{opacity:0;transform:translateX(-46px)}to{opacity:1;transform:none}}
+  @keyframes waveInR{from{opacity:0;transform:translateX(46px)}to{opacity:1;transform:none}}
+
+  /* skills: tree structure (root -> categories -> skills) */
+  .tree{margin-top:8px}
+  .sk-root{display:inline-block;font-weight:800;color:#06122b;background:linear-gradient(135deg,var(--accent),var(--accent2));
+    padding:9px 22px;border-radius:11px;font-size:1.02rem;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+  .sk-branch{margin-left:24px;border-left:2px solid rgba(91,140,255,.35);margin-top:2px}
+  .sk-node{position:relative;padding:14px 0 6px 26px}
+  .sk-node::before{content:"";position:absolute;left:0;top:27px;width:22px;height:2px;background:rgba(91,140,255,.35)}
+  .sk-cat{display:inline-block;font-weight:700;color:var(--accent);letter-spacing:.3px;
+    border:1px solid var(--border);background:var(--glass);padding:5px 12px;border-radius:8px}
+  .sk-cat.sk-sub{color:var(--accent2);font-size:.88rem;font-weight:600}
+  .sk-leaves{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .sk-leaves .tag{display:inline-flex;align-items:center;gap:6px}
+  .sk-leaves .tag svg{width:15px;height:15px;flex:none}
+  .chip-label{color:var(--accent);font-size:.85rem;font-weight:700;letter-spacing:.4px;margin:20px 0 8px}
+  .chiprow{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{background:rgba(10,16,32,.6);border:1px solid var(--border);color:var(--muted);font-size:.82rem;padding:5px 11px;border-radius:20px;transition:color .15s,border-color .15s}
+  .tag:hover{color:var(--text);border-color:var(--accent2)}
+
+  /* architecture diagram */
+  .arch{width:100%;overflow-x:auto;background:var(--glass);backdrop-filter:blur(6px);border:1px solid var(--border);border-radius:14px;padding:20px}
+  .arch svg{width:100%;min-width:660px;height:auto;display:block}
+  .arch .cap{color:var(--muted);font-size:.86rem;margin-top:12px}
+
+  /* experience timeline */
+  .role-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:2px}
+  .role-head .company{font-size:1.2rem;font-weight:700}.role-head .company span{color:var(--accent2)}
+  .role-head .meta{color:var(--muted);font-size:.9rem}
+  .role-title{color:var(--accent2);font-weight:600;margin-bottom:6px}
+  .timeline{position:relative;padding-left:26px;border-left:2px solid rgba(91,140,255,.35)}
+  .tl-item{position:relative;padding:2px 16px 18px 8px;border-radius:12px;transform-origin:left center}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-item::before{content:"";position:absolute;left:-33px;top:4px;width:13px;height:13px;border-radius:50%;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 0 4px rgba(91,140,255,.12);transition:transform .3s ease,box-shadow .3s ease,left .3s ease;z-index:1}
+  .tl-item h4{font-size:1.02rem;color:#fff;transition:color .2s ease}
+  .tl-item .tech{color:var(--accent2);font-size:.76rem;letter-spacing:.3px;display:block;margin:1px 0 3px}
+  .tl-item p{color:var(--muted);font-size:.93rem}
+
+  .contact-links{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
+  .contact-links a{background:var(--glass);backdrop-filter:blur(6px);border:1px solid var(--border);padding:12px 18px;border-radius:10px;color:var(--text);font-weight:600;transition:transform .15s,border-color .15s}
+  .contact-links a:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-2px)}
+  footer{text-align:center;color:var(--muted);padding:30px 0;border-top:1px solid var(--border);font-size:.88rem}
+  #toTop{position:fixed;right:22px;bottom:22px;z-index:60;width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:linear-gradient(135deg,var(--accent),var(--accent2));color:#06122b;font-size:1.2rem;font-weight:800;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
+  #toTop.show{opacity:1;pointer-events:auto}#toTop:hover{transform:translateY(-3px)}
+
+  @media(max-width:720px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .navlinks{position:fixed;inset:56px 0 auto 0;flex-direction:column;background:rgba(10,16,32,.97);padding:18px 24px;gap:16px;border-bottom:1px solid var(--border);display:none}
+    .navlinks.open{display:flex}.hamburger{display:block}
+  }
+  @media(prefers-reduced-motion:reduce){
+    #bgvid{display:none}.reveal{opacity:1;transition:none}.reveal .wv{opacity:1;transform:none;animation:none}.hf-node,.hf-center,.hf-label,.hf-arc{opacity:1;transform:none;animation:none}#rotate{border-right:0}html{scroll-behavior:auto}
+  }
+  .skilltree{margin-top:8px}
+  .skilltree svg{display:block;width:100%;height:auto}
+  .st-hint{color:var(--muted);font-size:.82rem;margin:8px 0 0}
+  .st-replay{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#06122b;font-weight:700;border:0;padding:7px 14px;border-radius:8px;cursor:pointer;margin-bottom:6px}
+  .gnode{opacity:0;transform:translateY(9px);transition:opacity .4s ease,transform .4s ease}
+  .gnode.on{opacity:1;transform:translateY(0)}
+  .gedge{transition:stroke-dashoffset .4s ease}
+  .gedge.on{stroke-dashoffset:0 !important}
+  @media(prefers-reduced-motion:reduce){.gnode{opacity:1;transform:none}.gedge{stroke-dashoffset:0 !important}}
+  .sk-tabs{display:flex;gap:8px;margin:6px 0 4px;flex-wrap:wrap}
+  .sk-tab{background:var(--glass);border:1px solid var(--border);color:var(--muted);font-weight:600;font-size:.9rem;padding:8px 16px;border-radius:8px;cursor:pointer;transition:all .15s}
+  .sk-tab.on{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#06122b;border:0}
+  .sk-tab:hover{color:var(--text)}
+  .sk-panel[hidden]{display:none}
+  .flow{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:center;gap:6px;margin-top:16px}
+  .step{flex:1 1 150px;max-width:185px;position:relative;padding:18px 12px 8px;text-align:center}
+  .step .num{position:absolute;top:2px;left:14px;font-size:.72rem;font-weight:700;color:var(--accent2)}
+  .step .ic{width:54px;height:54px;margin:0 auto 10px;border-radius:15px;display:flex;align-items:center;justify-content:center;background:var(--glass);border:1px solid var(--border)}
+  .step .ic svg{width:26px;height:26px}
+  .step h4{font-size:1rem;margin-bottom:4px}
+  .step p{color:var(--muted);font-size:.82rem;line-height:1.4}
+  .arrow{align-self:center;color:var(--accent2);font-size:1.5rem;opacity:.55}
+  @keyframes stepIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .reveal .step{opacity:0}
+  .reveal.visible .step{animation:stepIn .5s both}
+  .reveal.visible .step:nth-of-type(1){animation-delay:.10s}
+  .reveal.visible .step:nth-of-type(2){animation-delay:.22s}
+  .reveal.visible .step:nth-of-type(3){animation-delay:.34s}
+  .reveal.visible .step:nth-of-type(4){animation-delay:.46s}
+  .reveal.visible .step:nth-of-type(5){animation-delay:.58s}
+  .reveal.visible .step:nth-of-type(6){animation-delay:.70s}
+  .reveal.visible .step:nth-of-type(7){animation-delay:.82s}
+  @media(max-width:760px){.step{flex-basis:42%}.arrow{display:none}}
+  #howflow{max-width:720px;margin:16px auto 0}
+  #howflow svg{width:100%;height:auto;display:block;overflow:visible}
+  section.zz-left{max-width:84%;margin:0 auto;border-top:0}
+  section.zz-right{max-width:84%;margin:0 auto;border-top:0}
+  @media(max-width:960px){section.zz-left,section.zz-right{max-width:100%}}
+  .hero-grid{display:grid;grid-template-columns:1fr auto;gap:44px;align-items:center}
+  .hero-side{justify-self:center}
+  .hero-photo{position:relative;width:min(340px,40vw)}
+  .me{width:100%;height:auto;display:block;filter:drop-shadow(0 18px 40px rgba(0,0,0,.55));-webkit-mask-image:linear-gradient(to bottom,#000 82%,transparent);mask-image:linear-gradient(to bottom,#000 82%,transparent)}
+  .seal{position:absolute;left:-14px;bottom:8px;width:118px;height:118px;border-radius:50%;display:grid;place-items:center;filter:drop-shadow(0 8px 18px rgba(0,0,0,.5))}
+  .seal::before{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(rgba(91,140,255,.6) 0 3deg, transparent 3deg 9deg)}
+  .seal::after{content:"";position:absolute;inset:9px;border-radius:50%;background:radial-gradient(circle at 50% 38%,#17253f,#0b1424);border:2px solid var(--accent2);box-shadow:inset 0 0 0 4px rgba(40,211,176,.14)}
+  .seal .in{position:relative;z-index:1;text-align:center;line-height:1}
+  .seal .in .n{font-size:2rem;font-weight:800;background:linear-gradient(135deg,#5b8cff,#28d3b0);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .seal .in .y{font-size:.72rem;font-weight:700;letter-spacing:3px;color:#eaf0fb;margin-top:2px}
+  .seal .in .e{font-size:.46rem;letter-spacing:2px;color:#9db0d0;margin-top:1px}
+  @media(max-width:760px){.hero-grid{grid-template-columns:1fr;gap:20px}.hero-photo{width:230px}.seal{width:100px;height:100px}.seal .in .n{font-size:1.7rem}}
+  .hf-node,.hf-center{transform-box:fill-box;transform-origin:center}
+  .hf-node{opacity:0;transform:scale(.3);transition:opacity .4s ease, transform .45s cubic-bezier(.34,1.56,.64,1)}
+  .hf-node.in{opacity:1;transform:scale(1)}
+  .hf-node.pulse{animation:hfpulse .78s ease}
+  .hf-label{opacity:0;transition:opacity .5s ease}
+  .hf-label.in{opacity:1}
+  .hf-arc{opacity:0;transition:opacity .5s ease}
+  .hf-arc.in{opacity:1}
+  .hf-center{opacity:0;transform:scale(.3);transition:opacity .4s ease, transform .5s cubic-bezier(.34,1.56,.64,1)}
+  .hf-center.in{opacity:1;transform:scale(1)}
+  .hf-center.beat{animation:hfbeat 1.3s ease-in-out infinite}
+  @keyframes hfpulse{0%{transform:scale(1)}42%{transform:scale(1.42)}100%{transform:scale(1)}}
+  @keyframes hfbeat{0%,50%,100%{transform:scale(1)}12%,36%{transform:scale(1.06)}24%{transform:scale(1.01)}}
+  .role-sub{color:var(--muted);font-size:.95rem;max-width:820px;margin:0 0 24px;line-height:1.5}
+  .timeline::before{content:"";position:absolute;left:7px;top:0;width:2px;height:100%;background:linear-gradient(180deg,var(--accent),var(--accent2));display:none}
+  .tl-item{transition:transform .22s ease,background .22s ease,box-shadow .22s ease}
+  .tl-item:hover{background:rgba(91,140,255,.08);box-shadow:0 14px 34px rgba(0,0,0,.4),0 0 0 1px rgba(91,140,255,.32)}
+  .tl-item:hover::before{left:-28px;transform:scale(1.5);box-shadow:0 0 16px 3px rgba(91,140,255,.6)}
+  .tl-points{list-style:none;margin:8px 0 0;display:grid;gap:5px}
+  .tl-points li{position:relative;padding-left:16px;color:var(--muted);font-size:.85rem;line-height:1.45}
+  .tl-points li::before{content:"▹";position:absolute;left:0;color:var(--accent)}
+  .tl-points li b{color:#dfe7f5;font-weight:600}
+  .tl-body{max-width:840px;transform-origin:left center;transition:transform .22s ease}
+  .tl-item:hover .tl-body{transform:scale(1.05)}
+  /* snake / alternating timeline */
+  .timeline{max-width:1000px;margin:0 auto;padding:0;border-left:0}
+  .tl-wave{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
+  .tl-item{width:calc(50% - 56px);padding:4px 22px 26px 22px;z-index:1}
+  .tl-item::before{top:6px}
+  .tl-item:nth-child(odd){left:0;text-align:left}
+  .tl-item:nth-child(even){left:calc(50% + 56px);text-align:left}
+  .tl-item:nth-child(odd)::before{left:auto;right:-7px}
+  .tl-item:nth-child(even)::before{left:-7px;right:auto}
+  .tl-item:nth-child(odd) .tl-body{transform-origin:right center}
+  .tl-item:nth-child(even) .tl-body{transform-origin:left center}
+  @media(max-width:820px){
+    .timeline{max-width:100%}
+    .timeline::before{left:7px;display:block}
+    .tl-wave{display:none}
+    .tl-item,.tl-item:nth-child(odd),.tl-item:nth-child(even){width:100%;left:0;text-align:left;padding:2px 0 22px 30px}
+    .tl-item::before,.tl-item:nth-child(odd)::before,.tl-item:nth-child(even)::before{left:0;right:auto}
+    .tl-item:nth-child(odd) .tl-body,.tl-item:nth-child(even) .tl-body{transform-origin:left center}
+    .tl-item:nth-child(odd) .tl-points li{padding-left:16px;padding-right:0;text-align:left}
+    .tl-item:nth-child(odd) .tl-points li::before{left:0;right:auto}
+  }
+</style>
 </head>
+<body>
+<video id="bgvid" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+  <source src="images/background.mp4" type="video/mp4" />
+</video>
+<div class="overlay"></div>
 
-<body style="background-color: #000000;">
-
-    <video autoplay muted loop id="myVideo">
-        <source src="./images/background.mp4" type="video/mp4">
-    </video>
-
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark ">
-        <a class="navbar-brand" href="#"><h4 style="font-size: 170%;">V_ <span style="color: #ff0000;">Bhat</span></h4></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul class="navbar-nav ">
-            <li class="nav-item active">
-              <a class="nav-link" href="#work"><h5><span>Work</span></h5></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="./about.html"><h5><span>About </span></h5></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="https://docs.google.com/document/d/1nixdHqOufzdBr3S4qxPiQSpQVo_iyspLe588zLRpOd4/edit?usp=sharing"><h5><span>Resume </span></h5></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#contact"><h5><span>Contact</span></h5> </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      <div class="container" id="Name_card">
-          <div class="row">
-            <div class="col-12 col-sm-3 border-0">
-                <img src="./images/image.jpg" class="rounded-circle" alt="V_Bhat" style="width: 80%;" >
-            </div>
-            <div class="col-12 col-sm-9">
-                <h4><b><span style="color: #ff0000;" id="name">Vinayaka Bhat</span></b></h4>
-                <div class="row">
-                    <div class="col-12 col-sm-1"></div>
-                    <div class="col-12 col-sm-11">
-                        <p class="card-text">4<sup>th</sup> Year&nbspComputer Science and Engeneering<br>
-                            JSS Science and Technology University</p>
-                    </div>
-                </div>
-            </div>
-          </div>
-        <div class="w-100"></div>
+<header>
+  <nav>
+    <div class="brand">Vinayaka<span>.</span>Bhat</div>
+    <button class="hamburger" aria-label="Toggle menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+    <div class="navlinks" id="nav">
+      <a href="#top">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+      <a class="btn" href="Vinayaka-Bhat-Resume.pdf" target="_blank" rel="noopener">Résumé</a>
     </div>
+  </nav>
+</header>
 
-    <div class="container" id="work">
-        <div class="row">
-            <div class="col-12 col-sm-4"></div>
-            <div class="col-12 col-sm-4"><strong> Some of my <span>Work</span> </strong></div>
-            <div class="col-12 col-sm-4"></div>
-        </div>
-
-        <div class="row">
-            <div class="col-12 col-md-5">
-                <h1>Bus <span>-</span> Ticket Booking</h1><br>
-                <h5> Bus-Ticket Booking is a web app focused on booking a bus seat in advance.
-                    It also allows the user to revise travel history using unique PNR.
-                    Booked seat can also be canceled before the travelling date using the PNR.
-                </h5><br>
-            </div>
-            <div class="col-12 col-md-2"></div>
-            <div class="col-12 col-md-5">
-                <img src="./images/Bus_ticket1.png"  alt="Bus_ticket1" style="width: 60%;">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-12 col-md-5">
-                <img src="./images/library1.png"  alt="library1" style="width: 90%;"><br>
-            </div>
-            <div class="col-12 col-md-2"></div> <br>
-            <div class="col-12 col-md-5">
-                <h1>JAVA <span>Digital </span> Library</h1><br>
-                <h5> JAVA Digital Library is a JAVA project using AWT and SWING. Main purpose of this project
-                    is to showing the book's name and displaying the contents of the book. MongoDB
-                    is used to store data of the user and book details.  
-                </h5><br>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12 col-md-5">
-                <h1>NodeJS <span>-</span> MongoDB <span>CRUD</span> Operations</h1><br>
-                <h5> This is a simple web app to demonstrate MongoDB CRUD operations on NodeJS
-                        using web app. This allows users to Sign-Up or Sign-In. After the user enters 
-                        into his account it will show the user's details in dashboard. The user can edit
-                        his details or delete his account.
-                </h5><br>
-            </div>
-            <div class="col-12 col-md-1"></div>
-            <div class="col-12 col-md-5">
-                <img src="./images/mongo1.png"  alt="mongo1" style="width: 110%;">
-            </div>
-            <div class="col-12 col-md-1"></div>
-        </div>  
+<main class="wrap">
+  <section class="hero reveal" id="top">
+    <div class="hero-grid">
+    <div class="hero-main">
+    <div class="eyebrow">Software Development Engineer</div>
+    <h1>Vinayaka Bhat</h1>
+    <div class="rotate-wrap">I build <span id="rotate"></span></div>
+    <p class="lead">Backend engineer — Java &amp; Spring on AWS — I craft the quiet, dependable layer other systems bet on.</p>
+    <p class="sub" style="margin:0 0 26px">I turn fuzzy requirements into clean, reliable services — reaching for the right tool, not the fanciest one. Sometimes that’s a straightforward API and a well-shaped schema; sometimes it’s an event-driven, distributed design. Either way I’m big on testing, observability, and sane failure modes, and I count a quiet pager as a win. The backend is home, but I’ll climb the stack when a problem calls for it.</p>
+    <div class="cta">
+      <a class="primary" href="#experience">View Experience</a>
+      <a href="mailto:bhatvinayaka312@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/vinayakabhat-/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/vinayaka312" target="_blank" rel="noopener">GitHub</a>
     </div>
+    </div>
+    <div class="hero-side"><div class="hero-photo"><img class="me" src="images/vinayaka-cutout.png" alt="Vinayaka Bhat, Software Development Engineer"><div class="seal"><div class="in"><div class="n">5+</div><div class="y">YEARS</div><div class="e">EXPERIENCE</div></div></div></div></div>
+  </div>
+  </section>
 
-    <hr>
 
-    <footer id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-1"></div>
-                <div class="col-12 col-md-3">
-                    <h3>Related links</h3>
-                    <ul>
-                        <li><a href="https://github.com/vinayaka312">GitHub</a></li>
-                        <li><a href="https://www.linkedin.com/in/vinayaka-bhat-5aa056184">LinkedIn</a></li>
-                    </ul>
-                </div>
-                <div class="col-12 col-md-1"></div>
-                <div class="col-12 col-md-3">
-                    <h3>Contact</h3>
-                    <a href="mailto:bhatvinayaka312@gmail.com">bhatvinayaka312@gmail.com</a>
-                </div>
-                <div class="col-12 col-md-1"></div>
-                <div class="col-12 col-md-3">
-                    <h3>Copyright</h3>
-                    <p>© 2020 Vinayaka Bhat</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    
-   
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <section id="skills" class="reveal zz-left">
+    <h3 class="section-title">Skills &amp; Tools</h3>
+    <p class="sub">Backend-focused, with data-engineering and cloud range.</p>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+      <symbol id="i-cup" viewBox="0 0 24 24"><path d="M4 9h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z" fill="#e76f00"/><path d="M16 10h2a3 3 0 0 1 0 6h-2" fill="none" stroke="#e76f00" stroke-width="2"/><path d="M8 2c-1 2 1 3 0 5M12 2c-1 2 1 3 0 5" fill="none" stroke="#f89820" stroke-width="1.5" stroke-linecap="round"/></symbol>
+      <symbol id="i-py" viewBox="0 0 24 24"><rect x="3" y="3" width="12" height="12" rx="5" fill="#3776ab"/><rect x="9" y="9" width="12" height="12" rx="5" fill="#ffd43b"/></symbol>
+      <symbol id="i-db" viewBox="0 0 24 24"><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6" fill="#00758f"/><ellipse cx="12" cy="6" rx="8" ry="3" fill="#0aa5c4"/></symbol>
+      <symbol id="i-js" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3" fill="#f7df1e"/><text x="19" y="19" text-anchor="end" font-size="9" font-weight="800" fill="#111" font-family="Arial">JS</text></symbol>
+      <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19C5 9 14 6 19 5c0 10-8 14-14 14z" fill="#6db33f"/></symbol>
+      <symbol id="i-atom" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2" fill="#61dafb"/><g fill="none" stroke="#61dafb" stroke-width="1.2"><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/></g></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#28d3b0" stroke-width="1.6"/><path d="M8 12l3 3 5-6" fill="none" stroke="#28d3b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.5A3.5 3.5 0 0 1 18 18z" fill="#ff9900"/></symbol>
+      <symbol id="i-net" viewBox="0 0 24 24"><g stroke="#5b8cff" stroke-width="1.4"><line x1="6" y1="6" x2="18" y2="12"/><line x1="6" y1="18" x2="18" y2="12"/></g><g fill="#5b8cff"><circle cx="6" cy="6" r="2.6"/><circle cx="6" cy="18" r="2.6"/><circle cx="18" cy="12" r="2.6"/></g></symbol>
+      <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 6L3 12l5 6M16 6l5 6-5 6" fill="none" stroke="#28d3b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-flag" viewBox="0 0 24 24"><path d="M6 3v18" fill="none" stroke="#5b8cff" stroke-width="2" stroke-linecap="round"/><path d="M6 4h11l-2 3 2 3H6z" fill="#5b8cff"/></symbol>
+    <symbol id="i-hub" viewBox="0 0 24 24"><g stroke="#28d3b0" stroke-width="1.5"><line x1="12" y1="12" x2="12" y2="4"/><line x1="12" y1="12" x2="4" y2="18"/><line x1="12" y1="12" x2="20" y2="18"/></g><circle cx="12" cy="12" r="3.5" fill="#28d3b0"/></symbol><symbol id="i-box" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="13" rx="2" fill="none" stroke="#28d3b0" stroke-width="2"/><path d="M4 10h16" stroke="#28d3b0" stroke-width="2"/></symbol><symbol id="i-mysql" viewBox="0 0 24 24"><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6" fill="#00758f"/><ellipse cx="12" cy="6" rx="8" ry="3" fill="#1a9bb8"/><path d="M12.5 15c2.2-.6 3.6-2.4 5-2.4-.3 2.4-2.4 4.2-5 4.3z" fill="#f29111"/></symbol><symbol id="i-rds" viewBox="0 0 24 24"><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6" fill="#3b48cc"/><ellipse cx="12" cy="6" rx="8" ry="3" fill="#6b7bf0"/><path d="M16.5 3.2a6.2 6.2 0 0 1 3.3 5.3" fill="none" stroke="#ff9900" stroke-width="1.8" stroke-linecap="round"/></symbol><symbol id="i-dynamo" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" fill="#2e27ad"/><path d="M13 5.5l-4.5 7.5H12l-1 5.5 4.5-7.5H12z" fill="#4dd0ff"/></symbol></defs></svg>
+    <div class="sk-panel" id="p-net">
+      <div id="netgraph" style="height:78vh;min-height:560px"></div>
+    </div>
+  </section>
+
+  <section id="architecture" class="reveal zz-right">
+    <h3 class="section-title">How I Build</h3>
+    <div id="howflow"></div>
+  </section>
+
+  <section id="experience" class="reveal">
+    <h3 class="section-title">Experience</h3>
+    <div class="role-head">
+      <div class="company">Amazon<span>.</span></div>
+      <div class="meta">2021 – Present · Bengaluru, India</div>
+    </div>
+    <div class="role-title">Software Development Engineer</div>
+    <p class="role-sub">~5 years at Amazon across three orgs — <b>Kindle</b> (reliability &amp; infrastructure), <b>AWS Bedrock</b> (GenAI annotation platforms), and <b>Cross-Border financial systems</b> (intercompany accounting &amp; transfer pricing) — building Java/Spring backends on AWS.</p>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-body"><h4>GenAI Ledger Verification Agent</h4><span class="tech">Python · GenAI · Amazon Ion</span>
+        <p>Deterministic engine that recomputes accounting workbooks and self-validates journal entries against ledger records across country corridors — replacing an error-prone manual sign-off.</p>
+        <ul class="tl-points"><li>Recomputes Journal Entry Mapping workbooks in-memory and self-tests against cached formula values.</li><li>Validates <b>8 accounting segments</b> from both batch output and integration-test logs.</li><li>Deterministic generator scaffolds a new corridor by editing only <b>2 files</b>.</li></ul></div></div>
+      <div class="tl-item"><div class="tl-body"><h4>Cross-Account Transfer-Pricing Service</h4><span class="tech">Java · DynamoDB · SNS · CDK</span>
+        <p>Event-driven, cross-account integration for intercompany transfer processing — with retry/idempotency and feature-flag-gated rollout.</p>
+        <ul class="tl-points"><li>DynamoDB with secondary indexes; Jackson-serialized SNS message construction.</li><li>Cross-account publisher spanning <b>6 country entities</b> with item-level cost attribution.</li><li>Retry + idempotency for tax accuracy and audit traceability.</li></ul></div></div>
+      <div class="tl-item"><div class="tl-body"><h4>EU Cross-Border Accounting Pipeline</h4><span class="tech">Java · REST · AppConfig</span>
+        <p>Multi-stage, event-driven booking pipeline delivered under regulatory constraints, rolled out gradually via config flags.</p>
+        <ul class="tl-points"><li>External REST integration for business-type classification; ledger config via AppConfig.</li><li><b>9 production releases</b> across <b>5 use cases</b> and <b>10+ destination corridors</b>.</li><li>Scenario-based integration testing for cross-border regulatory adherence.</li></ul></div></div>
+      <div class="tl-item"><div class="tl-body"><h4>Service Routing Optimization</h4><span class="tech">Java · CDK · SNS/SQS/Lambda</span>
+        <p>Direct service-to-service communication layer in a high-volume, distributed transaction system.</p>
+        <ul class="tl-points"><li>Synchronous accessor libraries plus CDK-provisioned async event processing.</li><li>Removed <b>3 network hops</b> — lower latency and cleaner failure diagnosis.</li></ul></div></div>
+      <div class="tl-item"><div class="tl-body"><h4>Pipeline Reliability: 64% → 91%</h4><span class="tech">Java · Spring · DynamoDB</span>
+        <p>Root-caused and resolved failure modes in a high-scale, distributed workflow pipeline.</p>
+        <ul class="tl-points"><li>Fixed NPEs and batched <b>4,000+</b> record operations to eliminate timeouts.</li><li>Unblocked a <b>20-day</b> pipeline stall from dependency ambiguity.</li><li>Eliminated <b>25 daily failures</b>; closed <b>18 escalations</b> and <b>5 high-severity incidents</b>.</li></ul></div></div>
+      <div class="tl-item"><div class="tl-body"><h4>JDK 17 Migration</h4><span class="tech">Java · Spring/RPC · Build tooling</span>
+        <p>Coordinated a runtime upgrade across a large, interconnected microservice estate with zero customer impact.</p>
+        <ul class="tl-points"><li>Migrated <b>17 microservices</b> and <b>72 shared packages</b> (incl. a prerequisite framework upgrade).</li><li>Resolved <b>19 compliance risks</b>; moved onto an LTS runtime with current security patches.</li></ul></div></div>
+      <div class="tl-item"><div class="tl-body"><h4>Zero-Trust Authentication Migration</h4><span class="tech">Java · Spring · Multi-Region</span>
+        <p>Migrated services to zero-trust auth with zero downtime via a backward-compatibility pattern.</p>
+        <ul class="tl-points"><li><b>4 services across 8 regional deployments</b>; dual-server pattern for compatibility.</li><li>Invented a cross-fabric proxy test method; achieved EU (DMA) regulatory compliance.</li></ul></div></div>
+      <div class="tl-item"><div class="tl-body"><h4>Full-Stack Platforms & GenAI Evaluation</h4><span class="tech">React · Lambda · RDS · QuickSight</span>
+        <p>Built internal operations platforms and led quality for GenAI model evaluations.</p>
+        <ul class="tl-points"><li>Real-time dashboards, dispute-resolution workflow, role-based access; scaled a platform <b>253 → 500+</b> users.</li><li>Data pipeline scoring annotator agreement (Krippendorff’s Alpha + a custom metric) for model training.</li><li>Led an <b>8-engineer</b> effort — <b>65 design docs</b> tested, <b>144 CRs</b> reviewed; automation cut manual effort <b>~90%</b>.</li></ul></div></div>
+      </div>
+  </section>
+
+  <section id="contact" class="reveal">
+    <h3 class="section-title">Get in touch</h3>
+    <p class="sub">Open to Senior / SDE-2 backend roles. Open to anywhere in the world.</p>
+    <div class="contact-links">
+      <a href="mailto:bhatvinayaka312@gmail.com">✉ bhatvinayaka312@gmail.com</a>
+      <a href="https://www.linkedin.com/in/vinayakabhat-/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/vinayaka312" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+</main>
+
+<footer>© <span id="yr"></span> Vinayaka Bhat · Built with plain HTML/CSS/JS · Hosted on GitHub Pages</footer>
+<button id="toTop" aria-label="Back to top" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  var nav=document.getElementById('nav');
+  document.querySelectorAll('#nav a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  (function(){
+    if(reduce){document.getElementById('rotate').textContent='backend systems.';return;}
+    var phrases=['backend systems.','distributed, event-driven systems.','cross-border financial platforms.','reliable services at scale.'];
+    var el=document.getElementById('rotate'),pi=0,ci=0,del=false;
+    (function tick(){var p=phrases[pi];el.textContent=p.substring(0,ci);
+      if(!del){ci++;if(ci>p.length){del=true;return setTimeout(tick,1400);}}else{ci--;if(ci===0){del=false;pi=(pi+1)%phrases.length;}}
+      setTimeout(tick,del?45:80);})();
+  })();
+
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  (function(){var ng=document.getElementById('netgraph');if(ng&&'IntersectionObserver' in window){var gio=new IntersectionObserver(function(gs){gs.forEach(function(g){if(g.isIntersecting&&window.buildNet){gio.disconnect();buildNet();}});},{threshold:0.35});gio.observe(ng);}})();
+
+  var sObs=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;sObs.unobserve(e.target);
+    e.target.querySelectorAll('.num').forEach(function(n){var target=+n.dataset.target,suf=n.dataset.suffix||'',t0=null,dur=1400;
+      function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);n.textContent=Math.floor(p*target).toLocaleString()+(p===1?suf:'');if(p<1)requestAnimationFrame(step);}
+      if(reduce){n.textContent=target.toLocaleString()+suf;}else{requestAnimationFrame(step);}});});},{threshold:.4});
+  var stats=document.getElementById('stats');if(stats)sObs.observe(stats);
+
+  var secs=[...document.querySelectorAll('section[id]')],links={};
+  document.querySelectorAll('#nav a[href^="#"]').forEach(function(a){links[a.getAttribute('href').slice(1)]=a;});
+  var toTop=document.getElementById('toTop');
+  addEventListener('scroll',function(){toTop.classList.toggle('show',scrollY>500);
+    var cur='';secs.forEach(function(s){if(scrollY>=s.offsetTop-120)cur=s.id;});
+    Object.values(links).forEach(function(a){a.classList.remove('active');});if(links[cur])links[cur].classList.add('active');},{passive:true});
+
+  /* ---- Skills tree: top-down, staggered, grows node-by-node ---- */
+  (function(){
+    var T={n:'Skills',c:[
+     {n:'Languages',c:[{n:'Backend',c:[{n:'Java'},{n:'Python'}]},{n:'Query',c:[{n:'SQL'}]}]},
+     {n:'Frameworks',c:[{n:'Backend',c:[{n:'Spring Boot'},{n:'Spring MVC'}]},{n:'Testing',c:[{n:'JUnit'},{n:'Mockito'}]}]},
+     {n:'Databases',c:[{n:'Relational',c:[{n:'MySQL'},{n:'RDS'}]},{n:'NoSQL',c:[{n:'DynamoDB'}]}]},
+     {n:'AWS Services',c:[{n:'Compute & Storage',c:[{n:'Lambda'},{n:'S3'}]},{n:'Messaging',c:[{n:'SNS'},{n:'SQS'}]},{n:'API & Ops',c:[{n:'API Gateway'},{n:'CloudWatch'},{n:'IAM'}]},{n:'IaC & Analytics',c:[{n:'CDK'},{n:'QuickSight'}]}]},
+     {n:'Architecture & Practices',c:[{n:'Patterns',c:[{n:'Microservices'},{n:'Event-Driven'},{n:'Distributed Systems'}]},{n:'Design',c:[{n:'REST APIs'},{n:'System Design'}]},{n:'Delivery',c:[{n:'CI/CD'},{n:'Feature Flags'}]}]}
+    ]};
+    var ICON={'Java':'cup','Python':'py','SQL':'db','JavaScript':'js','Spring Boot':'leaf','Spring MVC':'leaf','React':'atom','JUnit':'check','Mockito':'check','MySQL':'mysql','RDS':'rds','DynamoDB':'dynamo','Lambda':'cloud','S3':'cloud','SNS':'cloud','SQS':'cloud','API Gateway':'cloud','CloudWatch':'cloud','IAM':'cloud','CDK':'cloud','QuickSight':'cloud','Microservices':'net','Event-Driven':'net','Distributed Systems':'net','REST APIs':'code','System Design':'net','CI/CD':'flag','Feature Flags':'flag'};
+    var XG=82,YG=125,R=24,lx=0,maxD=0;
+    (function lay(nd,d,idx){nd.d=d;maxD=Math.max(maxD,d);
+      if(nd.c){nd.c.forEach(function(k,i){lay(k,d+1,i);});nd.x=(nd.c[0].x+nd.c[nd.c.length-1].x)/2;}
+      else{nd.x=lx*XG+XG/2;lx++;}
+      nd.y=d*YG+55+(d>0?((idx%2===0)?-20:20):0);})(T,0,0);
+    var ord=0;(function(){var q=[T];while(q.length){var nd=q.shift();nd.o=ord++;if(nd.c)nd.c.forEach(function(k){q.push(k);});}})();
+    var W=Math.max(lx*XG,340),H=maxD*YG+190,e='',n='';
+    (function draw(nd){
+      if(nd.c)nd.c.forEach(function(k){var len=Math.hypot(k.x-nd.x,k.y-nd.y).toFixed(1);
+        e+='<line class="gedge" data-o="'+k.o+'" x1="'+nd.x+'" y1="'+nd.y+'" x2="'+k.x+'" y2="'+k.y+'" stroke="#3a4d78" stroke-width="1.5" style="stroke-dasharray:'+len+';stroke-dashoffset:'+len+'"/>';draw(k);});
+      var leaf=!nd.c, ic=leaf?(ICON[nd.n]||'code'):(nd.d===0?'hub':'box'), st=leaf?'#5b8cff':'#28d3b0';
+      n+='<g class="gnode" data-o="'+nd.o+'"><title>'+nd.n+'</title><circle cx="'+nd.x+'" cy="'+nd.y+'" r="'+R+'" fill="#12203c" stroke="'+st+'" stroke-width="2"/><use href="#i-'+ic+'" x="'+(nd.x-14)+'" y="'+(nd.y-14)+'" width="28" height="28"/>';
+      if(leaf)n+='<text x="'+(nd.x-2)+'" y="'+(nd.y+R+8)+'" transform="rotate(38 '+nd.x+' '+(nd.y+R+8)+')" font-size="10.5" fill="#cbd5e8">'+nd.n+'</text>';
+      else n+='<text x="'+nd.x+'" y="'+(nd.y+R+16)+'" font-size="11.5" font-weight="600" fill="'+(nd.d===0?'#fff':'#9db0d0')+'" text-anchor="middle">'+nd.n+'</text>';
+      n+='</g>';
+    })(T);
+    var host=document.getElementById('skilltree'); if(!host) return;
+    host.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg">'+e+n+'</svg>';
+    requestAnimationFrame(function(){var sc=host.parentNode; if(sc) sc.scrollLeft=(sc.scrollWidth-sc.clientWidth)/2;});
+    window.growSkills=function(){
+      var all=[].slice.call(document.querySelectorAll('#skilltree .gnode, #skilltree .gedge'));
+      all.forEach(function(x){x.classList.remove('on');});
+      if(reduce){all.forEach(function(x){x.classList.add('on');});return;}
+      for(var i=0;i<ord;i++){(function(i){setTimeout(function(){var m=document.querySelectorAll('#skilltree [data-o="'+i+'"]');[].forEach.call(m,function(x){x.classList.add('on');});},250+i*80);})(i);}
+    };
+    var _sfired=false;function _sCenter(){if(_sfired)return;var a=document.querySelector('.sk-tab.on'),t=a?a.getAttribute('data-t'):'net';var el=t==='net'?document.getElementById('netgraph'):(t==='svg'?document.getElementById('skilltree'):null);if(!el||el.getBoundingClientRect().height===0)el=document.getElementById('skills');if(!el)return;var r=el.getBoundingClientRect(),c=r.top+r.height/2,vc=(window.innerHeight||0)/2;if(r.bottom>0&&r.top<window.innerHeight&&Math.abs(c-vc)<window.innerHeight*0.22){_sfired=true;window.removeEventListener('scroll',_sCenter);if(t==='net'&&window.buildNet)buildNet();else if(window.growSkills)growSkills();}}window.addEventListener('scroll',_sCenter,{passive:true});_sCenter();
+  })();
+
+  /* ---- Skills: 3-tab comparison ---- */
+  window.skTab=function(t){
+    ['svg','indent','net'].forEach(function(k){
+      var p=document.getElementById('p-'+k); if(p)p.hidden=(k!==t);
+      var b=document.querySelector('.sk-tab[data-t="'+k+'"]'); if(b)b.classList.toggle('on',k===t);
+    });
+    if(t==='svg' && window.growSkills) growSkills();
+    if(t==='net') buildNet();
+  };
+  var netBuilt=false;
+  window.buildNet=function(){
+    if(netBuilt)return; netBuilt=true;
+    var host=document.getElementById('netgraph');
+    var sc=document.createElement('script');
+    sc.src='https://unpkg.com/vis-network/standalone/umd/vis-network.min.js';
+    sc.onload=function(){renderNet(host);};
+    sc.onerror=function(){host.innerHTML='<p style="color:#e0a86b;padding:24px">Could not load the interactive library (needs internet; the CDN may be blocked on your network).</p>';};
+    document.head.appendChild(sc);
+  };
+  function renderNet(host){
+    var T2={n:'Skills',c:[
+     {n:'Languages',c:[{n:'Backend',c:[{n:'Java'},{n:'Python'}]},{n:'Query',c:[{n:'SQL'}]}]},
+     {n:'Frameworks',c:[{n:'Backend',c:[{n:'Spring Boot'},{n:'Spring MVC'}]},{n:'Testing',c:[{n:'JUnit'},{n:'Mockito'}]}]},
+     {n:'Databases',c:[{n:'Relational',c:[{n:'MySQL'},{n:'RDS'}]},{n:'NoSQL',c:[{n:'DynamoDB'}]}]},
+     {n:'AWS Services',c:[{n:'Compute & Storage',c:[{n:'Lambda'},{n:'S3'}]},{n:'Messaging',c:[{n:'SNS'},{n:'SQS'}]},{n:'API & Ops',c:[{n:'API Gateway'},{n:'CloudWatch'},{n:'IAM'}]},{n:'IaC & Analytics',c:[{n:'CDK'},{n:'QuickSight'}]}]},
+     {n:'Architecture & Practices',c:[{n:'Patterns',c:[{n:'Microservices'},{n:'Event-Driven'},{n:'Distributed Systems'}]},{n:'Design',c:[{n:'REST APIs'},{n:'System Design'}]},{n:'Delivery',c:[{n:'CI/CD'},{n:'Feature Flags'}]}]}
+    ]};
+    var IC2={'Java':'cup','Python':'py','SQL':'db','JavaScript':'js','Spring Boot':'leaf','Spring MVC':'leaf','React':'atom','JUnit':'check','Mockito':'check','MySQL':'mysql','RDS':'rds','DynamoDB':'dynamo','Lambda':'lambda','S3':'s3','SNS':'sns','SQS':'sqs','API Gateway':'apigw','CloudWatch':'cw','IAM':'iam','CDK':'cdk','QuickSight':'qs','Microservices':'micro','Event-Driven':'bolt','Distributed Systems':'net','REST APIs':'code','System Design':'grid','CI/CD':'pipe','Feature Flags':'toggle','Skills':'hub','Languages':'code','Frameworks':'box','Databases':'db','AWS Services':'cloud','Architecture & Practices':'net','Backend':'code','Web':'js','Query':'db','Frontend':'atom','Testing':'check','Relational':'db','NoSQL':'nosql','Compute & Storage':'chip','Messaging':'msg','API & Ops':'gear','IaC & Analytics':'chart','Patterns':'net','Design':'ruler','Delivery':'rocket'};
+    var G2={
+     cup:'<path d="M4 9h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z" fill="#e76f00"/>',
+     py:'<rect x="3" y="3" width="12" height="12" rx="5" fill="#3776ab"/><rect x="9" y="9" width="12" height="12" rx="5" fill="#ffd43b"/>',
+     db:'<path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6" fill="#00758f"/><ellipse cx="12" cy="6" rx="8" ry="3" fill="#0aa5c4"/>',
+     js:'<rect x="2" y="2" width="20" height="20" rx="3" fill="#f7df1e"/>',
+     leaf:'<path d="M5 19C5 9 14 6 19 5c0 10-8 14-14 14z" fill="#6db33f"/>',
+     atom:'<circle cx="12" cy="12" r="2" fill="#61dafb"/><g fill="none" stroke="#61dafb" stroke-width="1.2"><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/></g>',
+     check:'<circle cx="12" cy="12" r="9" fill="none" stroke="#28d3b0" stroke-width="1.6"/><path d="M8 12l3 3 5-6" fill="none" stroke="#28d3b0" stroke-width="2"/>',
+     cloud:'<path d="M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.5A3.5 3.5 0 0 1 18 18z" fill="#ff9900"/>',
+     net:'<g stroke="#5b8cff" stroke-width="1.4"><line x1="6" y1="6" x2="18" y2="12"/><line x1="6" y1="18" x2="18" y2="12"/></g><g fill="#5b8cff"><circle cx="6" cy="6" r="2.6"/><circle cx="6" cy="18" r="2.6"/><circle cx="18" cy="12" r="2.6"/></g>',
+     code:'<path d="M8 6L3 12l5 6M16 6l5 6-5 6" fill="none" stroke="#28d3b0" stroke-width="2"/>',
+     flag:'<path d="M6 4h11l-2 3 2 3H6z" fill="#5b8cff"/><path d="M6 3v18" stroke="#5b8cff" stroke-width="2"/>',
+     hub:'<g stroke="#28d3b0" stroke-width="1.5"><line x1="12" y1="12" x2="12" y2="4"/><line x1="12" y1="12" x2="4" y2="18"/><line x1="12" y1="12" x2="20" y2="18"/></g><circle cx="12" cy="12" r="3.5" fill="#28d3b0"/>',
+     box:'<rect x="4" y="6" width="16" height="13" rx="2" fill="none" stroke="#28d3b0" stroke-width="2"/><path d="M4 10h16" stroke="#28d3b0" stroke-width="2"/>',
+     mysql:'<path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6" fill="#00758f"/><ellipse cx="12" cy="6" rx="8" ry="3" fill="#1a9bb8"/><path d="M12.5 15c2.2-.6 3.6-2.4 5-2.4-.3 2.4-2.4 4.2-5 4.3z" fill="#f29111"/>',
+     rds:'<path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6" fill="#3b48cc"/><ellipse cx="12" cy="6" rx="8" ry="3" fill="#6b7bf0"/><path d="M16.5 3.2a6.2 6.2 0 0 1 3.3 5.3" fill="none" stroke="#ff9900" stroke-width="1.8" stroke-linecap="round"/>',
+     dynamo:'<rect x="3" y="3" width="18" height="18" rx="3" fill="#2e27ad"/><path d="M13 5.5l-4.5 7.5H12l-1 5.5 4.5-7.5H12z" fill="#4dd0ff"/>',
+     lambda:'<rect x="3" y="3" width="18" height="18" rx="3" fill="#ed7100"/><path d="M8 18l4.5-11 1.5 4M13 13l3 5" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+     s3:'<rect x="3" y="3" width="18" height="18" rx="3" fill="#3f8624"/><path d="M7 8h10l-1 9a2 2 0 0 1-2 1.8h-4a2 2 0 0 1-2-1.8z" fill="#fff"/>',
+     sns:'<rect x="3" y="3" width="18" height="18" rx="3" fill="#e7157b"/><circle cx="8" cy="12" r="2" fill="#fff"/><g stroke="#fff" stroke-width="1.6"><line x1="10" y1="12" x2="17" y2="7"/><line x1="10" y1="12" x2="17" y2="12"/><line x1="10" y1="12" x2="17" y2="17"/></g>',
+     sqs:'<rect x="3" y="3" width="18" height="18" rx="3" fill="#e7157b"/><g fill="#fff"><rect x="6" y="7" width="12" height="3" rx="1"/><rect x="6" y="11" width="12" height="3" rx="1"/><rect x="6" y="15" width="12" height="3" rx="1"/></g>',
+     apigw:'<rect x="3" y="3" width="18" height="18" rx="3" fill="#8c4fff"/><path d="M10 7c-2 0-2 3-4 5 2 2 2 5 4 5M14 7c2 0 2 3 4 5-2 2-2 5-4 5" stroke="#fff" stroke-width="1.6" fill="none"/>',
+     cw:'<rect x="3" y="3" width="18" height="18" rx="3" fill="#e7157b"/><path d="M5 15l3-4 3 3 4-6 4 7" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+     iam:'<rect x="3" y="3" width="18" height="18" rx="3" fill="#dd344c"/><rect x="8" y="11" width="8" height="7" rx="1" fill="#fff"/><path d="M9.5 11V9a2.5 2.5 0 0 1 5 0v2" stroke="#fff" stroke-width="1.6" fill="none"/>',
+     cdk:'<rect x="3" y="3" width="18" height="18" rx="3" fill="#8c4fff"/><path d="M12 5l6 3.5v7L12 19l-6-3.5v-7z" fill="none" stroke="#fff" stroke-width="1.4"/><path d="M12 12l6-3.5M12 12v7M12 12L6 8.5" stroke="#fff" stroke-width="1.1" fill="none"/>',
+     qs:'<rect x="3" y="3" width="18" height="18" rx="3" fill="#8c4fff"/><g fill="#fff"><rect x="6" y="12" width="3" height="6"/><rect x="11" y="8" width="3" height="10"/><rect x="16" y="10" width="3" height="8"/></g>',
+     chip:'<rect x="7" y="7" width="10" height="10" rx="1.5" fill="none" stroke="#ff9900" stroke-width="1.8"/><rect x="10" y="10" width="4" height="4" fill="#ff9900"/><g stroke="#ff9900" stroke-width="1.4"><line x1="9" y1="4" x2="9" y2="7"/><line x1="15" y1="4" x2="15" y2="7"/><line x1="9" y1="17" x2="9" y2="20"/><line x1="15" y1="17" x2="15" y2="20"/></g>',
+     msg:'<rect x="4" y="7" width="16" height="11" rx="2" fill="none" stroke="#e7157b" stroke-width="1.8"/><path d="M4.5 8l7.5 6 7.5-6" fill="none" stroke="#e7157b" stroke-width="1.8"/>',
+     gear:'<circle cx="12" cy="12" r="4" fill="none" stroke="#8c4fff" stroke-width="1.8"/><g stroke="#8c4fff" stroke-width="1.8"><line x1="12" y1="3" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="21"/><line x1="3" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="21" y2="12"/></g>',
+     chart:'<circle cx="12" cy="12" r="7" fill="none" stroke="#8c4fff" stroke-width="1.8"/><path d="M12 12V5a7 7 0 0 1 6 3.6z" fill="#8c4fff"/>',
+     micro:'<g fill="#5b8cff"><rect x="3" y="9" width="6" height="6" rx="1.5"/><rect x="15" y="9" width="6" height="6" rx="1.5"/><rect x="9" y="3" width="6" height="6" rx="1.5"/><rect x="9" y="15" width="6" height="6" rx="1.5"/></g>',
+     bolt:'<path d="M13 2L5 13h5l-1 9 8-12h-5z" fill="#ffd43b"/>',
+     grid:'<rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="#5b8cff" stroke-width="1.6"/><path d="M4 10h16M4 15h16M10 4v16M15 4v16" stroke="#5b8cff" stroke-width=".9"/>',
+     pipe:'<path d="M7 8a6 6 0 0 1 9-1" fill="none" stroke="#28d3b0" stroke-width="1.8"/><path d="M17 16a6 6 0 0 1-9 1" fill="none" stroke="#28d3b0" stroke-width="1.8"/><path d="M15 4l2 2.5-3 1M9 20l-2-2.5 3-1" fill="none" stroke="#28d3b0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+     toggle:'<rect x="3" y="9" width="18" height="7" rx="3.5" fill="#5b8cff"/><circle cx="16.5" cy="12.5" r="3.7" fill="#fff"/>',
+     rocket:'<path d="M12 3c3 2 4.5 6 4.5 9L12 15l-4.5-3c0-3 1.5-7 4.5-9z" fill="none" stroke="#5b8cff" stroke-width="1.6"/><circle cx="12" cy="9" r="1.6" fill="#5b8cff"/><path d="M8 15l-2 4 4-2M16 15l2 4-4-2" fill="none" stroke="#5b8cff" stroke-width="1.4"/>',
+     ruler:'<g transform="rotate(-25 12 12)"><rect x="4" y="9" width="16" height="6" rx="1" fill="none" stroke="#5b8cff" stroke-width="1.6"/><path d="M8 9v2M12 9v2M16 9v2" stroke="#5b8cff" stroke-width="1.2"/></g>',
+     nosql:'<path d="M7 4h7l4 4v12H7z" fill="none" stroke="#00758f" stroke-width="1.6"/><path d="M14 4v4h4" fill="none" stroke="#00758f" stroke-width="1.6"/><path d="M9.5 12h5M9.5 15h5" stroke="#0aa5c4" stroke-width="1.3"/>'
+    };
+    function uri(k){return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#12203c"/>'+(G2[k]||G2.code)+'</svg>');}
+    var totalLeaves=0;(function count(nd){if(nd.c)nd.c.forEach(count);else nd._li=totalLeaves++;})(T2);
+    var RING=190;(function pos(nd,depth){if(nd.c){nd.c.forEach(function(ch){pos(ch,depth+1);});nd._ang=(nd.c[0]._ang+nd.c[nd.c.length-1]._ang)/2;}else{nd._ang=(nd._li+0.5)/totalLeaves*2*Math.PI;}nd._r=depth*RING;nd._x=Math.round(nd._r*Math.cos(nd._ang));nd._y=Math.round(nd._r*Math.sin(nd._ang));})(T2,0);
+    var id=0,items=[],parent={},children={};
+    (function build(node,par,level){var myId=++id;parent[myId]=par;if(par!=null){(children[par]=children[par]||[]).push(myId);}
+      var sz=[52,42,34,26][level>3?3:level];
+      var nd={id:myId,x:node._x,y:node._y,label:node.n,shape:'circularImage',image:uri(IC2[node.n]||'code'),size:sz,borderWidth:2,color:{border:level===0?'#28d3b0':(level>=3?'#5b8cff':'#7aa2ff'),background:'#12203c'},font:{color:'#cbd5e8',size:level===0?18:(level===1?16:14)}};
+      items.push({node:nd,edge:par!=null?{id:'e'+myId,from:par,to:myId}:null});
+      if(node.c)node.c.forEach(function(ch){build(ch,myId,level+1);});
+    })(T2,null,0);
+    var nodes=new vis.DataSet(),edges=new vis.DataSet();
+    var net=new vis.Network(host,{nodes:nodes,edges:edges},{
+      physics:false,
+      interaction:{hover:true,dragView:false,zoomView:false,dragNodes:true,selectConnectedEdges:false,tooltipDelay:100},
+      edges:{color:{color:'#3a4d78',highlight:'#5b8cff'},width:1.5,smooth:{type:'continuous'}},
+      nodes:{shadow:{enabled:true,color:'rgba(0,0,0,.4)',size:8}}
+    });
+    var posById={};items.forEach(function(it){posById[it.node.id]={x:it.node.x,y:it.node.y};});
+    net.moveTo({position:{x:0,y:0},scale:0.72});
+    var i=0,timer=setInterval(function(){
+      if(i>=items.length){clearInterval(timer);net.fit({animation:{duration:450}});return;}
+      var it=items[i++],n=it.node,pid=parent[n.id],gp=(pid!=null)?net.getPositions([pid])[pid]:null,pp=gp||{x:n.x,y:n.y};
+      var no={};for(var k in n)no[k]=n[k];no.x=pp.x;no.y=pp.y;nodes.add(no);
+      if(it.edge)edges.add(it.edge);
+      (function(id,sx,sy,tx,ty){var t0=performance.now(),d=320;(function st(){var pr=Math.min((performance.now()-t0)/d,1),e=1-Math.pow(1-pr,3);net.moveNode(id,sx+(tx-sx)*e,sy+(ty-sy)*e);if(pr<1)requestAnimationFrame(st);})();})(n.id,pp.x,pp.y,n.x,n.y);
+    },50);
+    var allN=items.map(function(it){return it.node.id;});
+    var allE=items.filter(function(it){return it.edge;}).map(function(it){return it.edge.id;});
+    function reset(){nodes.update(allN.map(function(nid){return {id:nid,opacity:1};}));edges.update(allE.map(function(eid){return {id:eid,color:{color:'#3a4d78'},width:1.5};}));}
+    function highlight(sel){
+      var kN={},kE={},cur=sel;
+      while(cur!=null){kN[cur]=1;if(parent[cur]!=null)kE['e'+cur]=1;cur=parent[cur];}
+      (function desc(x){(children[x]||[]).forEach(function(c){kN[c]=1;kE['e'+c]=1;desc(c);});})(sel);
+      nodes.update(allN.map(function(nid){return {id:nid,opacity:kN[nid]?1:0.12};}));
+      edges.update(allE.map(function(eid){return {id:eid,color:{color:kE[eid]?'#28d3b0':'#131c2e'},width:kE[eid]?3:1};}));
+    }
+    net.on('selectNode',function(p){if(p.nodes.length)highlight(p.nodes[0]);});
+    net.on('deselectNode',reset);
+    net.on('click',function(p){if(!p.nodes.length)reset();});
+  }
+
+
+  /* ---- How I Build: circular cycle (animated) ---- */
+  (function(){
+    var host=document.getElementById('howflow'); if(!host) return;
+    var S=[['Design','design','Write the design doc; model data flow & failure modes'],['Review','review','Peer & design review; align upstream & downstream teams'],['Implement','code','Build in small, reviewed increments'],['Test','test','Unit & integration; cover the edge cases'],['Ship','ship','Feature-flagged, gradual rollout'],['Monitor','monitor','Dashboards, alarms, fast incident response'],['Iterate','iterate','Measure, learn, improve']];
+    var G={design:'<path d="M4 20l3-1L18 8l-2-2L5 17z" fill="none" stroke="#5b8cff" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 6l2 2" stroke="#5b8cff" stroke-width="1.8"/>',review:'<rect x="3" y="5" width="13" height="9" rx="2" fill="none" stroke="#5b8cff" stroke-width="1.8"/><path d="M7 14v3l4-3" fill="none" stroke="#5b8cff" stroke-width="1.8" stroke-linejoin="round"/><circle cx="18" cy="13" r="3.4" fill="none" stroke="#28d3b0" stroke-width="1.6"/>',code:'<path d="M8 6L3 12l5 6M16 6l5 6-5 6" fill="none" stroke="#28d3b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',test:'<circle cx="12" cy="12" r="9" fill="none" stroke="#28d3b0" stroke-width="1.8"/><path d="M8 12l3 3 5-6" fill="none" stroke="#28d3b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',ship:'<path d="M12 3c3 2 4.5 6 4.5 9L12 15l-4.5-3c0-3 1.5-7 4.5-9z" fill="none" stroke="#5b8cff" stroke-width="1.8"/><circle cx="12" cy="9" r="1.6" fill="#5b8cff"/><path d="M8 15l-2 4 4-2M16 15l2 4-4-2" fill="none" stroke="#5b8cff" stroke-width="1.6"/>',monitor:'<path d="M4 15a8 8 0 0 1 16 0" fill="none" stroke="#28d3b0" stroke-width="1.8"/><path d="M12 15l4-3" stroke="#28d3b0" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="15" r="1.6" fill="#28d3b0"/>',iterate:'<path d="M7 8a6 6 0 0 1 9-1" fill="none" stroke="#5b8cff" stroke-width="1.8"/><path d="M17 16a6 6 0 0 1-9 1" fill="none" stroke="#5b8cff" stroke-width="1.8"/><path d="M15 4l2 3-3 1M9 20l-2-3 3-1" fill="none" stroke="#5b8cff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>'};
+    var defs='<marker id="hfah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6z" fill="#4a5f8f"/></marker>';
+    Object.keys(G).forEach(function(k){defs+='<symbol id="hf-'+k+'" viewBox="0 0 24 24">'+G[k]+'</symbol>';});
+    var CX=320,CY=312,R=196,N=S.length,LR=R+50,g=13*Math.PI/180,arcs='',nodes='',labels='';
+    var C=['#5b8cff','#9b7bff','#28d3b0','#f2c14e','#ff8f5a','#ff6b9d','#4dd0e1'];
+    function ang(i){return (-90+i*360/N)*Math.PI/180;}
+    for(var i=0;i<N;i++){var a1=ang(i)+g,a2=ang(i+1)-g,x1=CX+R*Math.cos(a1),y1=CY+R*Math.sin(a1),x2=CX+R*Math.cos(a2),y2=CY+R*Math.sin(a2);
+      arcs+='<path class="hf-arc" d="M'+x1.toFixed(1)+' '+y1.toFixed(1)+' A'+R+' '+R+' 0 0 1 '+x2.toFixed(1)+' '+y2.toFixed(1)+'" fill="none" stroke="#4a5f8f" stroke-width="2" marker-end="url(#hfah)"/>';}
+    for(var i=0;i<N;i++){var a=ang(i),x=CX+R*Math.cos(a),y=CY+R*Math.sin(a),col=C[i],gl=G[S[i][1]].replace(/#5b8cff/g,col).replace(/#28d3b0/g,col);
+      nodes+='<g class="hf-node"><circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="33" fill="#12203c" stroke="'+col+'" stroke-width="2.4"><title>'+S[i][2]+'</title></circle><g transform="translate('+(x-16).toFixed(1)+' '+(y-16).toFixed(1)+') scale(1.3333)">'+gl+'</g></g>';
+      var lx=CX+LR*Math.cos(a),ly=CY+LR*Math.sin(a),an=Math.abs(Math.cos(a))<0.34?'middle':(Math.cos(a)>0?'start':'end');
+      labels+='<text class="hf-label" x="'+lx.toFixed(1)+'" y="'+(ly+4).toFixed(1)+'" text-anchor="'+an+'" font-size="14.5" font-weight="600" fill="'+col+'">'+S[i][0]+'</text>';}
+    var center='<g class="hf-center"><circle cx="'+CX+'" cy="'+CY+'" r="70" fill="rgba(40,211,176,.12)" stroke="#28d3b0" stroke-width="1.5"/><text x="'+CX+'" y="'+(CY-6)+'" text-anchor="middle" font-size="30">\uD83C\uDF89</text><text x="'+CX+'" y="'+(CY+20)+'" text-anchor="middle" font-size="16" font-weight="700" fill="#28d3b0">Enjoy</text><text x="'+CX+'" y="'+(CY+39)+'" text-anchor="middle" font-size="12.5" fill="#9db0d0">&amp; celebrate</text></g>';
+    host.innerHTML='<svg viewBox="0 0 640 660" xmlns="http://www.w3.org/2000/svg"><defs>'+defs+'</defs>'+arcs+nodes+labels+center+'</svg>';
+    var ns=host.querySelectorAll('.hf-node'),ls=host.querySelectorAll('.hf-label'),ar=host.querySelectorAll('.hf-arc'),cen=host.querySelector('.hf-center'),started=false;
+    function pulseLoop(){var j=0;setInterval(function(){for(var k=0;k<ns.length;k++)ns[k].classList.remove('pulse');var c=ns[j%ns.length];void c.getBoundingClientRect();c.classList.add('pulse');j++;},1500);}
+    function play(){if(started)return;started=true;var i=0;(function pop(){if(i<ns.length){ns[i].classList.add('in');if(ls[i])ls[i].classList.add('in');if(ar[i])ar[i].classList.add('in');i++;setTimeout(pop,300);}else{cen.classList.add('in');setTimeout(function(){cen.classList.add('beat');pulseLoop();},420);}})();}
+    if('IntersectionObserver' in window){var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){o.disconnect();play();}});},{threshold:0.4});o.observe(host);}else{play();}
+  })();
+  /* ---- wave-in: stagger content per section ---- */
+  (function(){
+    var SEL='h1,.eyebrow,.rotate-wrap,.lead,.section-title,.sub,.cta,.sk-tabs,.st-hint,.howlist li,#howflow,.tl-item,.contact-links';
+    document.querySelectorAll('.reveal').forEach(function(sec){
+      var all=Array.prototype.slice.call(sec.querySelectorAll(SEL));
+      var items=all.filter(function(el){return !all.some(function(o){return o!==el && el.contains(o);});});
+      items.forEach(function(el,i){ el.classList.add('wv'); el.style.animationDelay=(i*0.09).toFixed(2)+'s'; });
+    });
+  })();
+  /* ---- Experience: curve connecting the dots (crest at each point) ---- */
+  (function(){
+    var tl=document.querySelector('#experience .timeline'); if(!tl) return;
+    var NS='http://www.w3.org/2000/svg', A=56;
+    var svg=document.createElementNS(NS,'svg');
+    svg.setAttribute('class','tl-wave'); svg.setAttribute('preserveAspectRatio','none');
+    svg.innerHTML='<defs><linearGradient id="twg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset="1" stop-color="#28d3b0"/></linearGradient></defs><path fill="none" stroke="url(#twg)" stroke-width="2.6" stroke-linecap="round"/>';
+    tl.insertBefore(svg, tl.firstChild);
+    var path=svg.querySelector('path');
+    function build(){
+      if(window.innerWidth<=820){svg.style.display='none';return;}
+      svg.style.display='';
+      var W=tl.clientWidth,H=tl.offsetHeight,cx=W/2,items=tl.querySelectorAll('.tl-item'),pts=[];
+      svg.setAttribute('width',W);svg.setAttribute('height',H);svg.setAttribute('viewBox','0 0 '+W+' '+H);
+      items.forEach(function(it,i){pts.push([(i%2===0)?cx-A:cx+A, it.offsetTop+13]);});
+      if(pts.length<1){return;}
+      pts.unshift([cx,0]); pts.push([cx,H]);
+      var d='M'+pts[0][0].toFixed(1)+' '+pts[0][1].toFixed(1);
+      for(var i=1;i<pts.length;i++){var ym=((pts[i-1][1]+pts[i][1])/2).toFixed(1);
+        d+=' C'+pts[i-1][0].toFixed(1)+' '+ym+' '+pts[i][0].toFixed(1)+' '+ym+' '+pts[i][0].toFixed(1)+' '+pts[i][1].toFixed(1);}
+      path.setAttribute('d',d);
+      var len=path.getTotalLength();path.style.strokeDasharray=len;
+      path.style.strokeDashoffset=tl.dataset.drawn?'0':len;
+    }
+    build();
+    window.addEventListener('load',build);
+    var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(build,150);});
+    var sec=document.getElementById('experience');
+    if('IntersectionObserver' in window){
+      var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){o.disconnect();tl.dataset.drawn='1';path.style.transition='stroke-dashoffset 1.9s ease';path.style.strokeDashoffset='0';}});},{threshold:0.12});
+      o.observe(sec);
+    } else {tl.dataset.drawn='1';path.style.strokeDashoffset='0';}
+  })();
+</script>
 </body>
 </html>
-
-
-<!-- 
- <!DOCTYPE html>
-<html lang="en">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <head>
-        <title>Asking out</title>
-    </head>
-    <body>
-        <div id="Header" style="text-align: center;padding:25% 0;background-color: #4bb3ce; color: #383c3f;">
-            <h1>Are you free on Friday?</h1>
-                <button type="button" id="successs1" class="btn btn-success" onclick="successs1();">YES</button> 
-                <button type="button" id="failed1" class="btn btn-danger" onclick="failed1();">NO</button>
-        </div>
-        <div id="body" style="text-align: center;padding:25% 0;background-color: #4bb3ce; color: #383c3f; display: none;">
-            <h1>Will you come to a movie with me?</h1>
-                <button type="button" id="successs2" class="btn btn-success" onclick="successs2();">YES</button> 
-                <button type="button" id="failed2" class="btn btn-danger" onclick="failed2();">NO</button>
-        </div>
-        <div id="thanks" style="text-align: center;padding:25% 0;background-color: #4bb3ce; color: #383c3f; display: none;">
-            <h1>THANK YOU!!!</h1>
-        </div>
-        <script>
-            function successs1() {
-                var myButton1 = document.getElementById("successs1");
-
-                // Add a click event listener to the button
-                myButton1.addEventListener("click", function() {
-                    // Display an alert message
-                    alert("Good choice");
-                });
-                var myDiv1 = document.getElementById("Header");
-                // Set the display property to "none"
-                myDiv1.style.display = "none";
-                var myDiv2 = document.getElementById("body");
-                // Set the display property to "none"
-                myDiv2.style.display = "block";
-            }
-
-            function failed1() {
-                var myButton2 = document.getElementById("failed1");
-
-                // Add a click event listener to the button
-                myButton2.addEventListener("click", function() {
-                    // Display an alert message
-                    alert("Wrong answer selct again");
-                });
-            }
-            function successs2() {
-                var myButton1 = document.getElementById("successs2");
-
-                // Add a click event listener to the button
-                myButton1.addEventListener("click", function() {
-                    // Display an alert message
-                    alert("Good choice");
-                });
-                var myDiv = document.getElementById("body");
-                // Set the display property to "none"
-                myDiv.style.display = "none";
-                var myDiv2 = document.getElementById("thanks");
-                // Set the display property to "none"
-                myDiv2.style.display = "block";
-            }
-
-            function failed2() {
-                var myButton2 = document.getElementById("failed2");
-
-                // Add a click event listener to the button
-                myButton2.addEventListener("click", function() {
-                    // Display an alert message
-                    alert("Wrong answer selct again");
-                });
-
-            }
-        </script>
-    </body>
-</html>
- -->
